@@ -47,7 +47,7 @@ export class CreatePlaylistPage implements OnInit {
         this.selectedContents = this.playlists['playListcontentList'];
         this.selectedContents.map((e) => {
           e['isSelected'] = true;
-          if (!e['metaData']) {
+          if (!e['metaData'] && e['content_metadata']) {
             e['metaData'] = JSON.parse(e['content_metadata'])
           }
         });
@@ -56,6 +56,7 @@ export class CreatePlaylistPage implements OnInit {
       } else {
         this.selectedContents = extras.state?.['selectedContents'];
       }
+      this.selectedContents = this.selectedContents.filter((e) => e['metaData']);
       this.reSelectedContent = this.selectedContents;
     }
   }
